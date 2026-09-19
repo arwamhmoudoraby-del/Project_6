@@ -293,7 +293,7 @@ Image applyBlur(const Image& input) {
  *    - To position (x, height - 1 - y) in the output
  * 3. Return the rotated image
  */
-Image rotate90(const Image& input) {
+Image rotate90(const Image& input) { 
     int height = input.getHeight();
     int width = input.getWidth();
     int channels = input.getChannels();
@@ -302,6 +302,15 @@ Image rotate90(const Image& input) {
     // TODO: Implement this function
     // For each pixel and each channel:
     //   output(x, height-1-y, c) = input(y, x, c)
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            for (int c = 0; c < channels;c++) {
+                output(x, height - 1 - y, c) = input(y, x, c);
+
+            }
+        }
+
+    }
 
     return output;
 }
