@@ -247,12 +247,18 @@ Image adjustContrast(const Image& input, float factor) {
     int width = input.getWidth();
     int channels = input.getChannels();
     Image output(width, height, channels);
+    
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            for (int c = 0; c < channels; c++) {
 
-    // TODO: Implement this function
-    // For each pixel and each channel:
-    //   new_value = factor * (input(y, x, c) - 128) + 128
-    //   output(y, x, c) = max(0, min(255, new_value))
+                float new_value = factor * (input(y, x, c) - 128) + 128;
 
+                output(y, x, c) = max(0, min(255, (int)new_value));
+            }
+        }
+    }
+    
     return output;
 }
 
