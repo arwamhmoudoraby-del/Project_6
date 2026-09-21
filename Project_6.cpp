@@ -226,6 +226,18 @@ Image adjustBrightness(const Image& input, int value) {
     // For each pixel and each channel:
     //   new_value = input(y, x, c) + value
     //   output(y, x, c) = max(0, min(255, new_value))
+    for (int x = 0; x<height; x++)
+    {
+        for (int y = 0; y<width; y++)
+        {
+            for (int c = 0;c<channels; c++)
+            {
+                int new_value = input(y, x, c) + value;
+                new_value = max(0, min(255, new_value));
+                output(y, x, c) = new_value;
+            }
+        }
+    }
 
     return output;
 }
@@ -247,7 +259,7 @@ Image adjustContrast(const Image& input, float factor) {
     int width = input.getWidth();
     int channels = input.getChannels();
     Image output(width, height, channels);
-    
+
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             for (int c = 0; c < channels; c++) {
@@ -258,7 +270,7 @@ Image adjustContrast(const Image& input, float factor) {
             }
         }
     }
-    
+
     return output;
 }
 
@@ -299,7 +311,7 @@ Image applyBlur(const Image& input) {
  *    - To position (x, height - 1 - y) in the output
  * 3. Return the rotated image
  */
-Image rotate90(const Image& input) { 
+Image rotate90(const Image& input) {
     int height = input.getHeight();
     int width = input.getWidth();
     int channels = input.getChannels();
