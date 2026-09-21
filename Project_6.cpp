@@ -180,6 +180,15 @@ Image flipHorizontal(const Image& input) {
     // For each pixel and each channel:
     //   output(y, width-1-x, c) = input(y, x, c)
 
+    for (int row = 0;row < height;row++) {
+        for (int column = 0;column < width;column++) {
+            for (int c = 0;c < channels;c++) {
+                output(row, width - 1 - column, c) = input(row, column, c); //row=y representing height , column=x representing width
+            }
+            
+        }
+    }
+
     return output;
 }
 
