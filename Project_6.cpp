@@ -226,9 +226,9 @@ Image adjustBrightness(const Image& input, int value) {
     // For each pixel and each channel:
     //   new_value = input(y, x, c) + value
     //   output(y, x, c) = max(0, min(255, new_value))
-    for (int x = 0; x<height; x++)
+    for (int y= 0; y<height; y++)
     {
-        for (int y = 0; y<width; y++)
+        for (int x = 0; x <width; x++)
         {
             for (int c = 0;c<channels; c++)
             {
