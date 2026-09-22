@@ -153,7 +153,7 @@ Image convertToGrayscale(const Image& input) {
 
     for(int y=0;y<height;y++){
         for(int x=0;x<width;x++){
-            
+
             int R=input(y,x,0);
             int G=input(y,x,1);
             int B=input(y,x,2);
@@ -164,7 +164,7 @@ Image convertToGrayscale(const Image& input) {
         }
     }
 
-    
+
 
     return output;
 }
@@ -194,7 +194,7 @@ Image flipHorizontal(const Image& input) {
             for (int c = 0;c < channels;c++) {
                 output(row, width - 1 - column, c) = input(row, column, c); //row=y representing height , column=x representing width
             }
-            
+
         }
     }
 
@@ -317,12 +317,22 @@ Image applyBlur(const Image& input) {
     int channels = input.getChannels();
     Image output(width, height, channels);
 
-    // TODO: Implement this function
-    // For each pixel (from y=1 to height-2, x=1 to width-2) and each channel:
-    //   sum = 0
-    //   For each neighbor (ky from -1 to 1, kx from -1 to 1):
-    //     sum += input(y+ky, x+kx, c)
-    //   output(y, x, c) = sum / 9
+
+    for (int y = 1; y < height - 1; y++) {
+        for (int x = 1; x < width - 1; x++) {
+            for (int c = 0; c < channels; c++) {
+                int sum = 0;
+
+                for (int ky = -1; ky <= 1; ky++) {
+                    for (int kx = -1; kx <= 1; kx++) {
+                        sum += input(y + ky, x + kx, c);
+                    }
+                }
+
+                output(y, x, c) = sum / 9;
+            }
+        }
+    }
 
     return output;
 }
